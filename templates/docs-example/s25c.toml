@@ -1,0 +1,20 @@
+name = "Docs Example"
+port = 3030
+
+[[routes]]
+name = "Get Start"
+path = "/get-start"
+
+[[routes.children]]
+name = "Introduction"
+path = "/introduction"
+page = "pages/get-start/introduction.md"
+
+[[routes]]
+name = "Component"
+path = "/component"
+
+[[routes.children]]
+name = "Button"
+path = "/button"
+page = "pages/component/button.md"
