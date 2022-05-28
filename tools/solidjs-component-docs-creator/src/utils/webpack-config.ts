@@ -2,13 +2,30 @@ import * as path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+const ProgressPlugin = require('progress-bar-webpack-plugin');
+
+const jsxLoaderOptions = {
+  babelrc: false,
+  configFile: false,
+  presets: [
+    require.resolve('@babel/preset-env'),
+    require.resolve('babel-preset-solid'),
+    require.resolve('@babel/preset-typescript'),
+  ],
+  plugins: [
+    require.resolve('@babel/plugin-syntax-dynamic-import'),
+    require.resolve('@babel/plugin-proposal-class-properties'),
+    require.resolve('@babel/plugin-proposal-object-rest-spread'),
+  ],
+};
+
 type GetWebpackConfigOptions = {
   mode: 'development' | 'production';
   port?: number;
   rewrites?: RegExp[];
 };
 
-const getWebpackConfig = (options: GetWebpackConfigOptions) => {
+const getWebpackConfig = (options: GetWebpackConfigOptions): any => {
   const { mode, port, rewrites } = options;
   return {
     mode,
@@ -42,6 +59,7 @@ const getWebpackConfig = (options: GetWebpackConfigOptions) => {
         template: path.join(__dirname, '../../public/index.html'),
         publicPath: '/',
       }),
+      new ProgressPlugin(true),
     ],
     performance: {
       maxEntrypointSize: 2000000,
@@ -59,8 +77,11 @@ const getWebpackConfig = (options: GetWebpackConfigOptions) => {
         {
           test: /\.md$/,
           use: [
-            'babel-loader',
-            '@njt-vis-tools/solidjs-component-markdown-loader',
+            {
+              loader: require.resolve('babel-loader'),
+              options: jsxLoaderOptions,
+            },
+            require.resolve('@njt-vis-tools/solidjs-component-markdown-loader'),
           ],
         },
         {
@@ -78,28 +99,15 @@ const getWebpackConfig = (options: GetWebpackConfigOptions) => {
         },
         {
           test: /\.ts?$/,
-          use: 'ts-loader',
+          use: require.resolve('ts-loader'),
           exclude: /node_modules/,
         },
         {
-          test: /\.(js|ts)x?$/,
+          test: /\.(js|ts)x$/,
           // exclude: /node_modules/,
           use: {
-            loader: 'babel-loader',
-            options: {
-              babelrc: false,
-              configFile: false,
-              presets: [
-                '@babel/preset-env',
-                'solid',
-                '@babel/preset-typescript',
-              ],
-              plugins: [
-                '@babel/plugin-syntax-dynamic-import',
-                '@babel/plugin-proposal-class-properties',
-                '@babel/plugin-proposal-object-rest-spread',
-              ],
-            },
+            loader: require.resolve('babel-loader'),
+            options: jsxLoaderOptions,
           },
           resolve: {
             fullySpecified: false,
@@ -114,7 +122,7 @@ const getWebpackConfig = (options: GetWebpackConfigOptions) => {
               loader: require.resolve('css-loader'),
             },
             {
-              loader: 'postcss-loader',
+              loader: require.resolve('postcss-loader'),
               options: {
                 postcssOptions: {
                   plugins: [require.resolve('postcss-preset-env')],

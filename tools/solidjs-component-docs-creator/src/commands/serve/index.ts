@@ -1,21 +1,14 @@
 import Webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import getWebpackConfig from '../../utils/webpack.config.js';
-import { generateCodeFiles } from '../../utils/code-generator.js';
-
-type RouteOption = {
-  name: string;
-  path: string;
-  page: string;
-  children: RouteOption[];
-};
+import getWebpackConfig from '../../utils/webpack-config';
+import { generateCodeFiles } from '../../utils/code-generator';
 
 type ServeOptions = {
   port: number;
-  routes: RouteOption[];
+  routes: RouteRootModel[];
 };
 
-async function serve({ port, routes }: ServeOptions) {
+async function serve({ port, routes }: ServeOptions): Promise<any> {
   generateCodeFiles();
   const rewrites = routes.map(route => new RegExp(route.path));
   const webpackConfig = getWebpackConfig({
@@ -29,8 +22,7 @@ async function serve({ port, routes }: ServeOptions) {
 
   try {
     console.log('[DOCS]', 'Starting server...');
-    const res = await server.start();
-    console.log(res);
+    await server.start();
   } catch (error) {
     console.error('[DOCS]', error);
   }

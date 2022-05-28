@@ -3,17 +3,15 @@ import { readFileSync, statSync } from 'fs';
 import * as net from 'net';
 import toml from 'toml';
 
-const getDefaultConfig = () => {
-  return {
-    name: '',
-    port: 3010,
-    routes: [],
-  };
-};
+const getDefaultConfig = () => ({
+  name: '',
+  port: 3010,
+  routes: [],
+});
 
 /** read config file */
-export const getConfig = () => {
-  const config: Record<string, any> = getDefaultConfig();
+export const getConfig = (): ConfigModel => {
+  const config: ConfigModel = getDefaultConfig();
 
   try {
     const customConfig = toml.parse(
@@ -29,7 +27,7 @@ export const getConfig = () => {
 
 /** check the port is occupied */
 const isPortOccupied = (port: number): Promise<false> =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     const server = net.createServer().listen(port);
 
     server.on('listening', () => {
@@ -40,27 +38,26 @@ const isPortOccupied = (port: number): Promise<false> =>
     server.on('error', (err: any) => {
       // 端口已经被使用
       if (err.code === 'EADDRINUSE') {
-        reject(
-          new Error(`The port [${port}] is occupied, please change other port.`)
+        throw new Error(
+          `The port [${port}] is occupied, please change other port.`
         );
       } else {
-        reject(err);
+        throw new Error(err);
       }
     });
   });
 
 /** get idle port  */
-export const getIdlePort = async (port: number) => {
+export const getIdlePort = async (port: number): Promise<number> => {
   try {
-    const isOccupied = await isPortOccupied(port);
+    await isPortOccupied(port);
 
-    if (!isOccupied) return port;
+    return port;
   } catch (_error) {
     const usePort = await getIdlePort(port + 1);
     return usePort;
   }
 };
-
 
 export const isFolder = (name: string): boolean => {
   try {

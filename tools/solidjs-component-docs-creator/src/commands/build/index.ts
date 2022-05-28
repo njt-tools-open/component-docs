@@ -1,19 +1,12 @@
 import Webpack from 'webpack';
-import getWebpackConfig from '../../utils/webpack.config.js';
-import { generateCodeFiles } from '../../utils/code-generator.js';
-
-type RouteOption = {
-  name: string;
-  path: string;
-  page: string;
-  children: RouteOption[];
-};
+import getWebpackConfig from '../../utils/webpack-config';
+import { generateCodeFiles } from '../../utils/code-generator';
 
 type ServeOptions = {
-  routes: RouteOption[];
+  routes: RouteRootModel[];
 };
 
-async function build({ routes }: ServeOptions) {
+async function build({ routes }: ServeOptions): Promise<any> {
   generateCodeFiles();
   const rewrites = routes.map(route => new RegExp(route.path));
   const webpackConfig = getWebpackConfig({ mode: 'production', rewrites });
@@ -26,9 +19,7 @@ async function build({ routes }: ServeOptions) {
     }
     if (stats?.hasErrors()) {
       console.log(stats.toString());
-      return;
     }
-    console.log('complete');
   });
 }
 

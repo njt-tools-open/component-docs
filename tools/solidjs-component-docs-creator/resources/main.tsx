@@ -18,7 +18,7 @@ const App: Component = () => {
       <Router>
         <Sidebar items={routes} />
         <Nav />
-        <div style={{ 'padding-top': '78px', 'padding-left': '240px' }}>
+        <div className="container-markdown">
           <div style={{ padding: '20px' }}>
             <Routes />
           </div>
@@ -29,6 +29,5 @@ const App: Component = () => {
 };
 
 export default App;
-
 
 render(() => <App />, document.getElementById('root') as HTMLElement);

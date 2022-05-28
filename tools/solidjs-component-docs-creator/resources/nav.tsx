@@ -18,9 +18,7 @@ function Nav(): JSXElement {
     >
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            NJT Material
-          </Typography>
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }} style={{fontSize: '20px' }}>PROJECT_NAME</Typography>
         </Toolbar>
       </AppBar>
     </Box>

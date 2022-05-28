@@ -12,13 +12,13 @@ type Transform = (options: { filename: string; content: string }) => void;
 
 const resourcesFolder = join(__dirname, '../../resources');
 
-const formatDeclaration = (str: string) => {
-  return `Page${str
-    .replace(/[^\w]/g, '')
-    .replace(/^\w/, o => o.toUpperCase())}`;
-};
+const createObjectProperty = (key: string, value: any) =>
+  types.objectProperty(types.identifier(key), value);
 
-// 生成目标文件
+const formatDeclaration = (str: string) =>
+  `Page${str.replace(/[^\w]/g, '').replace(/^\w/, o => o.toUpperCase())}`;
+
+/** 生成目标文件 */
 function generateTargetFile(filePath: string, context: string) {
   const folder = resolve('./.s25c');
   if (!isFolder(folder)) {
@@ -27,12 +27,12 @@ function generateTargetFile(filePath: string, context: string) {
   writeFileSync(join(folder, filePath), context, { encoding: 'utf8' });
 }
 
-// 转换 routes.tsx 文件
-const transformRoutes: Transform = ({ filename, content }) => {
+/** 转换 routes.tsx 文件 */
+const transformRoutesFile: Transform = ({ filename, content }) => {
   const CONFIG = getConfig();
   let lastImportIndex = -1;
 
-  let ast = parse(content, {
+  const ast = parse(content, {
     sourceType: 'module',
     plugins: ['jsx', 'typescript'],
   });
@@ -46,7 +46,7 @@ const transformRoutes: Transform = ({ filename, content }) => {
   const pages: Record<string, any>[] = [];
 
   CONFIG.routes.forEach(root => {
-    let page: Record<string, any> = {
+    const page: Record<string, any> = {
       ...root,
       name: root.name,
       path: root.path,
@@ -76,33 +76,27 @@ const transformRoutes: Transform = ({ filename, content }) => {
         const nodes: any = [];
         pages.forEach(page => {
           const node = types.objectExpression([
-            types.objectProperty(
-              types.identifier('name'),
-              types.stringLiteral(page.name)
-            ),
-            types.objectProperty(
-              types.identifier('path'),
-              types.stringLiteral(page.path)
-            ),
-            types.objectProperty(
-              types.identifier('children'),
+            createObjectProperty('name', types.stringLiteral(page.name)),
+            createObjectProperty('path', types.stringLiteral(page.path)),
+            createObjectProperty(
+              'children',
               types.arrayExpression(
-                page.children.map(item => {
-                  return types.objectExpression([
-                    types.objectProperty(
-                      types.identifier('name'),
+                page.children.map(item =>
+                  types.objectExpression([
+                    createObjectProperty(
+                      'name',
                       types.stringLiteral(item.name)
                     ),
-                    types.objectProperty(
-                      types.identifier('path'),
+                    createObjectProperty(
+                      'path',
                       types.stringLiteral(item.path)
                     ),
-                    types.objectProperty(
-                      types.identifier('component'),
+                    createObjectProperty(
+                      'component',
                       types.identifier(item.component)
                     ),
-                  ]);
-                })
+                  ])
+                )
               )
             ),
           ]);
@@ -116,14 +110,36 @@ const transformRoutes: Transform = ({ filename, content }) => {
   generateTargetFile(filename, output);
 };
 
+/** 仅复制 */
 const transformOnlyCopy: Transform = ({ filename, content }) => {
   generateTargetFile(filename, content);
+};
+
+/** 转换 nav.tsx */
+const transformNavFile: Transform = ({ filename, content }) => {
+  const CONFIG = getConfig();
+
+  const ast = parse(content, {
+    sourceType: 'module',
+    plugins: ['jsx', 'typescript'],
+  });
+
+  traverse(ast, {
+    enter(path) {
+      if (path.node.type === 'JSXText' && path.node.value === 'PROJECT_NAME') {
+        // eslint-disable-next-line no-param-reassign
+        path.node.value = CONFIG.name;
+      }
+    },
+  });
+  const output = generate(ast).code;
+  generateTargetFile(filename, output);
 };
 
 const resources = [
   {
     filename: 'routes.tsx',
-    transform: transformRoutes,
+    transform: transformRoutesFile,
   },
   {
     filename: 'main.css',
@@ -135,7 +151,7 @@ const resources = [
   },
   {
     filename: 'nav.tsx',
-    transform: transformOnlyCopy,
+    transform: transformNavFile,
   },
   {
     filename: 'sidebar.tsx',
@@ -145,9 +161,13 @@ const resources = [
     filename: 'highlight-code.tsx',
     transform: transformOnlyCopy,
   },
+  {
+    filename: 'highlight-code-fold.tsx',
+    transform: transformOnlyCopy,
+  },
 ];
 
-export function generateCodeFiles() {
+export function generateCodeFiles(): void {
   resources.forEach(({ filename, transform }) => {
     const filePath = join(resourcesFolder, filename);
     const content = readFileSync(filePath, { encoding: 'utf8' });

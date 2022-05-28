@@ -3,7 +3,6 @@
 import * as fs from 'fs';
 import { Command } from 'commander';
 
-import makeCommand from './commands/make';
 import serveCommand from './commands/serve';
 import buildCommand from './commands/build';
 import { getConfig } from './utils';
@@ -15,14 +14,6 @@ const packageJson = JSON.parse(
 const program = new Command();
 
 const CONFIG = getConfig();
-
-/**
- * make project base resource
- */
-program
-  .command('make')
-  .description('Make project base resource.')
-  .action(makeCommand);
 
 /**
  * start devepment server

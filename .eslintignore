@@ -1,3 +1,13 @@
-node_modules
 lib
+bin
+bundle
+
+public
+tools/solidjs-component-docs-creator/resources
+
+.s25c
+
+node_modules
+
 .vscode
+.husky
