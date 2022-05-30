@@ -1,5 +1,11 @@
 # @njt-tools-open/solidjs-component-docs-creator
 
+## 1.0.3
+
+### Patch Changes
+
+- e8f75c1: Fix readme description.
+
 ## 1.0.2
 
 ### Patch Changes
