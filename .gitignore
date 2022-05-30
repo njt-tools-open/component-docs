@@ -3,3 +3,5 @@ bin
 bundle
 
 .s25c
+
+.eslintcache

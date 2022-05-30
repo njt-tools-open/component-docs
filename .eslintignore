@@ -2,8 +2,8 @@ lib
 bin
 bundle
 
-public
-tools/solidjs-component-docs-creator/resources
+packages/solidjs-component-docs-creator/public
+packages/solidjs-component-docs-creator/resources
 
 .s25c
 
