@@ -1,6 +1,6 @@
 {
   "name": "@njt-tools-open/solidjs-component-docs-creator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Tool for build solidjs component material documents.",
   "keywords": [
     "solidjs",
@@ -41,7 +41,7 @@
     "@babel/template": "^7.16.7",
     "@babel/traverse": "^7.17.10",
     "@babel/types": "^7.18.0",
-    "@njt-tools-open/solidjs-component-markdown-loader": "workspace:^1.0.1",
+    "@njt-tools-open/solidjs-component-markdown-loader": "workspace:^1.0.2",
     "@types/node": "^17.0.21",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.2",

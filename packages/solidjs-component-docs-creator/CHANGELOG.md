@@ -1,5 +1,13 @@
 # @njt-tools-open/solidjs-component-docs-creator
 
+## 1.0.2
+
+### Patch Changes
+
+- 1ad3434: Add package description.
+- Updated dependencies [1ad3434]
+  - @njt-tools-open/solidjs-component-markdown-loader@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
