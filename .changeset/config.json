@@ -7,5 +7,7 @@
   "access": "restricted",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [
+    "@njt-tools-open/solidjs-component-docs-template"
+  ]
 }

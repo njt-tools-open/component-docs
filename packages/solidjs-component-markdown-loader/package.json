@@ -12,6 +12,10 @@
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "markdown-it": "^13.0.1"
   },
