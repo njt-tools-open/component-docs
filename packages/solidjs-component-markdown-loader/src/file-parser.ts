@@ -3,7 +3,7 @@ import * as path from 'path';
 
 const { generateModuleName, writeCacheFile } = require('./utils');
 
-function parseTsxBlock(cacheFolder, source) {
+function parseTsxBlock(cacheFolder: string, source: string): string {
   const files = {};
   let index = 0;
 
@@ -25,15 +25,15 @@ function parseTsxBlock(cacheFolder, source) {
   let declarations = '';
   let filepath = '';
 
-  for (let key in files) {
-    filepath = path.join(cacheFolder, key);
-    writeCacheFile(`${filepath}.tsx`, files[key]);
-    declarations += `\nimport ${key} from '${filepath}';`;
+  for (const key in files) {
+    if ({}.hasOwnProperty.call(files, key)) {
+      filepath = path.join(cacheFolder, key);
+      writeCacheFile(`${filepath}.tsx`, files[key]);
+      declarations += `\nimport ${key} from '${filepath}';`;
+    }
   }
 
-  return {
-    declarations,
-  };
+  return declarations;
 }
 
 export default parseTsxBlock;

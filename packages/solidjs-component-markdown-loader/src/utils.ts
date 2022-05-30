@@ -1,10 +1,8 @@
 import { statSync, mkdirSync, writeFileSync } from 'fs';
 
-export const generateModuleName = (index: any) => {
-  return `Example${index}`;
-};
+export const generateModuleName = (index: number): string => `Example${index}`;
 
-export const isFolder = (name: string) => {
+export const isFolder = (name: string): boolean => {
   try {
     const stats = statSync(name);
     return stats.isDirectory();
@@ -13,10 +11,10 @@ export const isFolder = (name: string) => {
   }
 };
 
-export const mkdir = (name: string) => {
+export const mkdir = (name: string): void => {
   mkdirSync(name);
 };
 
-export const writeCacheFile = (name: string, content: string) => {
+export const writeCacheFile = (name: string, content: string): void => {
   writeFileSync(name, content, { encoding: 'utf8' });
 };
