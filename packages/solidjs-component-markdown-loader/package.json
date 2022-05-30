@@ -3,8 +3,16 @@
   "version": "1.0.1",
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Solidjs markdown file loader",
   "main": "lib/index.js",
+  "keywords": [
+    "solidjs",
+    "webpack",
+    "loader",
+    "markdown",
+    "document",
+    "components"
+  ],
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc"
@@ -15,6 +23,10 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njt-tools-open/component-docs.git"
   },
   "dependencies": {
     "markdown-it": "^13.0.1"

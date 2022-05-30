@@ -1,7 +1,12 @@
 {
   "name": "@njt-tools-open/solidjs-component-docs-creator",
   "version": "1.0.1",
-  "description": "",
+  "description": "Tool for build solidjs component material documents.",
+  "keywords": [
+    "solidjs",
+    "document",
+    "components"
+  ],
   "bin": {
     "s25c": "./bin/index.js"
   },
@@ -14,11 +19,15 @@
     "public",
     "resources"
   ],
-  "author": "",
+  "author": "xiaoYown <qzy09101018@sina.com>",
   "license": "ISC",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njt-tools-open/component-docs.git"
   },
   "dependencies": {
     "@babel/core": "^7.14.8",
