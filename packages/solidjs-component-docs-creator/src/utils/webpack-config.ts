@@ -81,7 +81,9 @@ const getWebpackConfig = (options: GetWebpackConfigOptions): any => {
               loader: require.resolve('babel-loader'),
               options: jsxLoaderOptions,
             },
-            require.resolve('@njt-vis-tools/solidjs-component-markdown-loader'),
+            require.resolve(
+              '@njt-tools-open/solidjs-component-markdown-loader'
+            ),
           ],
         },
         {

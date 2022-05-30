@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@changesets/cli': ^2.21.1
+      '@changesets/cli': ^2.22.0
       '@commitlint/cli': ^13.1.0
       '@commitlint/config-conventional': ^13.1.0
       '@commitlint/cz-commitlint': ^16.2.3
@@ -53,7 +53,7 @@ importers:
       '@babel/template': ^7.16.7
       '@babel/traverse': ^7.17.10
       '@babel/types': ^7.18.0
-      '@njt-vis-tools/solidjs-component-markdown-loader': workspace:^1.0.0
+      '@njt-tools-open/solidjs-component-markdown-loader': workspace:^1.0.0
       '@types/node': ^17.0.21
       autoprefixer: ^10.4.2
       babel-loader: ^8.2.2
@@ -94,7 +94,7 @@ importers:
       '@babel/template': 7.16.7
       '@babel/traverse': 7.17.10
       '@babel/types': 7.18.0
-      '@njt-vis-tools/solidjs-component-markdown-loader': link:../solidjs-component-markdown-loader
+      '@njt-tools-open/solidjs-component-markdown-loader': link:../solidjs-component-markdown-loader
       '@types/node': 17.0.31
       autoprefixer: 10.4.7_postcss@8.4.13
       babel-loader: 8.2.5_887a5110397f957d9e06dd05497793db
@@ -136,7 +136,7 @@ importers:
   templates/docs-example:
     specifiers:
       '@babel/core': ^7.14.8
-      '@njt-vis-tools/solidjs-component-docs-creator': workspace:^1.0.0
+      '@njt-tools-open/solidjs-component-docs-creator': workspace:^1.0.0
       '@suid/icons-material': 0.1.0
       '@suid/material': 0.1.0
       '@types/node': ^17.0.21
@@ -153,7 +153,7 @@ importers:
       solid-js: 1.4.1
     devDependencies:
       '@babel/core': 7.17.10
-      '@njt-vis-tools/solidjs-component-docs-creator': link:../../packages/solidjs-component-docs-creator
+      '@njt-tools-open/solidjs-component-docs-creator': link:../../packages/solidjs-component-docs-creator
       '@types/node': 17.0.31
       simple-progress-webpack-plugin: 2.0.0
       typescript: 4.6.4

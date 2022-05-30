@@ -13,7 +13,7 @@
     "build": "pnpm run build --filter ./packages"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.21.1",
+    "@changesets/cli": "^2.22.0",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@commitlint/cz-commitlint": "^16.2.3",
