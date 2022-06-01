@@ -1,5 +1,11 @@
 # @njt-tools-open/solidjs-component-markdown-loader
 
+## 1.0.3
+
+### Patch Changes
+
+- 1f150a9: Add @njt-tools-open/solidjs-component-markdown-loader declaration
+
 ## 1.0.2
 
 ### Patch Changes
