@@ -4,6 +4,7 @@
     "outDir": "lib",
     "strict": true,
     "allowJs": true,
+    "declaration": true,
     "strictNullChecks": true,
     "noImplicitAny": false,
     "noImplicitReturns": true,
