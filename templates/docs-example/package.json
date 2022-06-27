@@ -2,7 +2,6 @@
   "name": "@njt-tools-open/solidjs-component-docs-template",
   "version": "1.0.0",
   "scripts": {
-    "make": "s25c make",
     "serve": "s25c serve",
     "build": "s25c build"
   },
