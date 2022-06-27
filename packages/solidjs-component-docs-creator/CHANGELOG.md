@@ -1,5 +1,29 @@
 # @njt-tools-open/solidjs-component-docs-creator
 
+## 1.0.6
+
+### Patch Changes
+
+- 4e4d787: update readme
+
+## 1.0.5
+
+### Patch Changes
+
+- f7c4acb: Fix bug document nav title not insert
+
+## 1.0.4
+
+### Patch Changes
+
+- 382a052: Fix readme
+
+## 1.0.3
+
+### Patch Changes
+
+- e8f75c1: Fix readme description.
+
 ## 1.0.2
 
 ### Patch Changes

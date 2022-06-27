@@ -1,6 +1,6 @@
 {
   "name": "@njt-tools-open/solidjs-component-docs-creator",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "Tool for build solidjs component material documents.",
   "keywords": [
     "solidjs",

@@ -20,7 +20,7 @@
 
 ```sh
 # pull document template
-npx degit xiaoyown/njt-tools-open%2Fcomponent-docs/templates/docs-example my_solidjs_component
+npx degit njt-tools-open/component-docs/templates/docs-example my_solidjs_component
 # install dependencies
 cd my_solidjs_component & npm install
 # or
@@ -64,5 +64,5 @@ npm run serve
 
 ```sh
 # build assets for production
-npm run serve
+npm run build
 ```

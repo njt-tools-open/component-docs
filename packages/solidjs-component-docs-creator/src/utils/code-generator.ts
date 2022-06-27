@@ -126,7 +126,10 @@ const transformNavFile: Transform = ({ filename, content }) => {
 
   traverse(ast, {
     enter(path) {
-      if (path.node.type === 'JSXText' && path.node.value === 'PROJECT_NAME') {
+      if (
+        path.node.type === 'JSXText' &&
+        path.node.value.trim() === 'PROJECT_NAME'
+      ) {
         // eslint-disable-next-line no-param-reassign
         path.node.value = CONFIG.name;
       }
