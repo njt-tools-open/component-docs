@@ -1,5 +1,11 @@
 # @njt-tools-open/solidjs-component-docs-creator
 
+## 1.0.5
+
+### Patch Changes
+
+- f7c4acb: Fix bug document nav title not insert
+
 ## 1.0.4
 
 ### Patch Changes
