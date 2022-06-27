@@ -1,0 +1,5 @@
+---
+'@njt-tools-open/solidjs-component-docs-creator': patch
+---
+
+update readme
