@@ -64,5 +64,5 @@ npm run serve
 
 ```sh
 # build assets for production
-npm run serve
+npm run build
 ```
