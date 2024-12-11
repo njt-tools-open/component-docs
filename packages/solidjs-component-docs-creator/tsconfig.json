@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
     "outDir": "bin",
     "strict": true,
     "allowJs": true,

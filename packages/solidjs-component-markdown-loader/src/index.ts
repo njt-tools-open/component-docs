@@ -13,13 +13,12 @@ const createMdFolder = resourcePath =>
     .replace(/[/]/g, '-')
     .replace(/\.md$/, '');
 
-function markdwonLoader(content) {
+function markdwonLoader(this: any, content) {
   if (!isFolder(cacheFolder)) {
     mkdir(cacheFolder);
   }
   const mdCacheFolder = path.join(
     cacheFolder,
-    // @ts-ignore
     createMdFolder(this.resourcePath)
   );
   if (!isFolder(mdCacheFolder)) {

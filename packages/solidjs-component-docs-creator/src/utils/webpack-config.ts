@@ -2,7 +2,7 @@ import * as path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const ProgressPlugin = require('progress-bar-webpack-plugin');
+import ProgressPlugin from 'progress-bar-webpack-plugin';
 
 const jsxLoaderOptions = {
   babelrc: false,

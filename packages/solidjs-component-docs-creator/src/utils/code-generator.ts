@@ -1,12 +1,12 @@
 import { join, resolve } from 'path';
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { parse } from '@babel/parser';
-import template from '@babel/template';
+// import template from '@babel/template';
 import traverse from '@babel/traverse';
 import generate from '@babel/generator';
 import { getConfig, isFolder } from './index';
 
-const types = require('@babel/types');
+import * as types from '@babel/types';
 
 type Transform = (options: { filename: string; content: string }) => void;
 
@@ -15,8 +15,8 @@ const resourcesFolder = join(__dirname, '../../resources');
 const createObjectProperty = (key: string, value: any) =>
   types.objectProperty(types.identifier(key), value);
 
-const formatDeclaration = (str: string) =>
-  `Page${str.replace(/[^\w]/g, '').replace(/^\w/, o => o.toUpperCase())}`;
+// const formatDeclaration = (str: string) =>
+//   `Page${str.replace(/[^\w]/g, '').replace(/^\w/, o => o.toUpperCase())}`;
 
 /** 生成目标文件 */
 function generateTargetFile(filePath: string, context: string) {
@@ -29,45 +29,44 @@ function generateTargetFile(filePath: string, context: string) {
 
 /** 转换 routes.tsx 文件 */
 const transformRoutesFile: Transform = ({ filename, content }) => {
-  const CONFIG = getConfig();
-  let lastImportIndex = -1;
-
+  // const CONFIG = getConfig();
+  // let lastImportIndex = -1;
   const ast = parse(content, {
     sourceType: 'module',
     plugins: ['jsx', 'typescript'],
   });
-  ast.program.body.forEach((node, index) => {
-    if (node.type === 'ImportDeclaration') {
-      lastImportIndex = index;
-    }
-  });
+  // ast.program.body.forEach((node, index) => {
+  //   if (node.type === 'ImportDeclaration') {
+  //     lastImportIndex = index;
+  //   }
+  // });
 
   // 收集路由
   const pages: Record<string, any>[] = [];
 
-  CONFIG.routes.forEach(root => {
-    const page: Record<string, any> = {
-      ...root,
-      name: root.name,
-      path: root.path,
-      children: [],
-    };
-    (root.children ?? []).forEach(route => {
-      lastImportIndex += 1;
-      const declarationName = formatDeclaration(route.name);
-      const declaration = `import ${declarationName} from '../${route.page}'`;
-      const declarationAst = template.ast(declaration);
+  // CONFIG.routes.forEach(root => {
+  //   const page: Record<string, any> = {
+  //     ...root,
+  //     name: root.name,
+  //     path: root.path,
+  //     children: [],
+  //   };
+  //   (root.children ?? []).forEach(route => {
+  //     lastImportIndex += 1;
+  //     const declarationName = formatDeclaration(route.name);
+  //     const declaration = `import ${declarationName} from '../${route.page}'`;
+  //     const declarationAst = template.ast(declaration);
 
-      ast.program.body.splice(lastImportIndex, 0, declarationAst);
+  //     ast.program.body.splice(lastImportIndex, 0, declarationAst);
 
-      page.children.push({
-        name: route.name,
-        path: route.path,
-        component: declarationName,
-      });
-    });
-    pages.push(page);
-  });
+  //     page.children.push({
+  //       name: route.name,
+  //       path: route.path,
+  //       component: declarationName,
+  //     });
+  //   });
+  //   pages.push(page);
+  // });
 
   traverse(ast, {
     enter(path) {

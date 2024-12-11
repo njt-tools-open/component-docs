@@ -1,16 +1,41 @@
-import { JSXElement } from 'solid-js';
+import { JSXElement } from "solid-js";
+
+import PageIntroduction from '../pages/get-start/introduction.md';
+import PageButton from '../pages/component/button.md';
 
 function NotFound(): JSXElement {
   return <div>404</div>;
 }
-
 const routes = [
   {
-    name: 'NotFound',
-    path: '*all',
+    name: "Get Start",
+    path: "/get-start",
+    children: [
+      {
+        name: "Introduction",
+        path: "/introduction",
+        component: PageIntroduction,
+        component: () => PageIntroduction
+      },
+    ],
+  },
+  {
+    name: "Component",
+    path: "/component",
+    children: [
+      {
+        name: "Button",
+        path: "/button",
+        component: PageButton,
+        component: () => PageButton
+      },
+    ],
+  },
+  {
+    name: "NotFound",
+    path: "*all",
     noSidebar: true,
-    component: NotFound,
+    component: () => <NotFound />,
   },
 ];
-
 export default routes;

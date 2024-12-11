@@ -1,7 +1,7 @@
 import MarkdownIt from 'markdown-it';
 import * as path from 'path';
 
-const { generateModuleName, writeCacheFile } = require('./utils');
+import { generateModuleName, writeCacheFile } from './utils';
 
 function parseTsxBlock(cacheFolder: string, source: string): string {
   const files = {};

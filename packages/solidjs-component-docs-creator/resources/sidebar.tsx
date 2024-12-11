@@ -4,7 +4,7 @@ import ListItem from '@suid/material/ListItem';
 import ListItemButton from '@suid/material/ListItemButton';
 import ListItemIcon from '@suid/material/ListItemIcon';
 import useTheme from '@suid/material/styles/useTheme';
-import { RouteDefinition, useLocation, useNavigate } from 'solid-app-router';
+import { useLocation, RouteDefinition, A } from '@solidjs/router';
 import { createMemo, JSXElement } from 'solid-js';
 
 type SidebarProps = {
@@ -24,12 +24,8 @@ const SidebarItem = ({
 }) => {
   const location = useLocation();
   const pathname = `${prevPath}${options.path}`;
-  const navigate = useNavigate();
   const selected = createMemo(() => location.pathname === pathname);
-
-  const handleClick = () => {
-    navigate(pathname);
-  };
+ 
   return (
     <ListItem
       disablePadding
@@ -47,9 +43,10 @@ const SidebarItem = ({
           fontSize: 14,
           color: '#616161',
         }}
-        onClick={handleClick}
       >
+        <A href={pathname}>
         {options.name}
+        </A>
       </ListItemButton>
     </ListItem>
   );
